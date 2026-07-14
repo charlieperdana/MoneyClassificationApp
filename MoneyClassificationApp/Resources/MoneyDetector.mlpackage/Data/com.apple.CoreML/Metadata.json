@@ -1,0 +1,14 @@
+{
+  "MLModelDescriptionKey" : "To detect money and nominal using object detector",
+  "MLModelCreatorDefinedKey" : {
+    "com.apple.coreml.model.preview.type" : "objectDetector",
+    "com.apple.createml.training.started" : "2026-07-14T14:51:36Z",
+    "com.apple.createml.version" : "26.3.0",
+    "com.apple.createml.training.finished" : "2026-07-14T15:38:57Z",
+    "com.apple.createml.app.tag" : "175.7",
+    "iterations" : "1500",
+    "com.apple.createml.model.created" : "2026-07-14T15:38:57Z",
+    "com.apple.createml.app.version" : "6.2"
+  },
+  "MLModelAuthorKey" : "charlie siagian"
+}

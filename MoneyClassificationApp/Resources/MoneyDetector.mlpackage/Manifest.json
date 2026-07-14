@@ -1,0 +1,24 @@
+{
+    "fileFormatVersion": "1.0.0",
+    "itemInfoEntries": {
+        "7AE30CE0-DDAF-46FC-8848-4B77A73179DD": {
+            "author": "com.apple.CoreML",
+            "description": "CoreML Model Specification",
+            "name": "MoneyDetector.mlmodel",
+            "path": "com.apple.CoreML/MoneyDetector.mlmodel"
+        },
+        "8FAB9C94-9306-4FF0-80D3-D16E33184EA7": {
+            "author": "com.apple.CoreML",
+            "description": "External Metadata Overlay",
+            "name": "Metadata.json",
+            "path": "com.apple.CoreML/Metadata.json"
+        },
+        "C5F0C2B2-E24A-49FB-84B2-45EC9F458A1B": {
+            "author": "com.apple.CoreML",
+            "description": "External FeatureDescription Overlay",
+            "name": "FeatureDescriptions.json",
+            "path": "com.apple.CoreML/FeatureDescriptions.json"
+        }
+    },
+    "rootModelIdentifier": "7AE30CE0-DDAF-46FC-8848-4B77A73179DD"
+}
