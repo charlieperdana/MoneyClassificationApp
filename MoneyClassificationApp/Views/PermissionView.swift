@@ -15,23 +15,33 @@ struct PermissionView: View {
     private let audioHolder = AudioFeedbackServiceHolder()
 
     var body: some View {
-        VStack(spacing: 24) {
-            Image(systemName: "camera.fill")
-                .font(.system(size: 64))
-                .foregroundStyle(.tint)
-                .accessibilityHidden(true)
+        VStack {
+            
+            Image("icon")
+                .resizable()
+                .frame(width: 156, height: 156)
+                .padding(.bottom, 48)
+            
+            
+            VStack(spacing: 24) {
+                
+                Image(systemName: "camera.fill")
+                    .font(.system(size: 64))
+                    .foregroundStyle(.tint)
+                    .accessibilityHidden(true)
 
-            Text("Izin Kamera Diperlukan")
-                .font(.title.weight(.bold))
-                .multilineTextAlignment(.center)
+                Text("Izin Kamera Diperlukan")
+                    .font(.title.weight(.bold))
+                    .multilineTextAlignment(.center)
 
-            Text(message)
-                .font(.body)
-                .multilineTextAlignment(.center)
-                .foregroundStyle(.secondary)
-                .padding(.horizontal)
+                Text(message)
+                    .font(.body)
+                    .multilineTextAlignment(.center)
+                    .foregroundStyle(.secondary)
+                    .padding(.horizontal)
 
-            actionButton
+                actionButton
+            }
         }
         .padding()
         .onAppear { audioHolder.service.speak(message, interrupt: true) }

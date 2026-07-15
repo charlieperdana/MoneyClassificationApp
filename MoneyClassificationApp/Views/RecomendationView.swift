@@ -39,7 +39,11 @@ struct RecomendationView: View {
         .navigationTitle("Rekomendasi")
         .navigationBarTitleDisplayMode(.inline)
         .task {
-            await viewModel.generateRecomendation(for: totalMoney)
+            async let recommendation = viewModel.generateRecomendation(for: totalMoney)
+            async let speech = viewModel.generateRecomendationSpeech(for: totalMoney)
+            
+            await recommendation
+            await speech
         }
     }
 
