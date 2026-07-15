@@ -13,7 +13,6 @@
 /* Begin PBXContainerItemProxy section */
 		8ED0D79F30064CA600CF0B45 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-
 			containerPortal = 8ED0D78730064CA500CF0B45 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 8ED0D78E30064CA500CF0B45;
@@ -63,7 +62,6 @@
 		};
 		8ED0D79B30064CA600CF0B45 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -122,7 +120,6 @@
 				5ACC88600000000000000002 /* SimulatorCameraClient */,
 			);
 			productName = MoneyClassificationApp;
-
 			productReference = 8ED0D78F30064CA500CF0B45 /* MoneyClassificationApp.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -404,7 +401,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 47R229NS2D;
+				DEVELOPMENT_TEAM = ND4DZWJCVY;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -421,7 +418,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 26.5;
@@ -449,7 +446,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3G5BUM52J7;
+				DEVELOPMENT_TEAM = ND4DZWJCVY;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -466,7 +463,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 26.5;
@@ -650,5 +647,4 @@
 /* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8ED0D78730064CA500CF0B45 /* Project object */;
-
 }
