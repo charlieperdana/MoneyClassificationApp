@@ -11,6 +11,8 @@ import SwiftData
 struct CountView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var viewModel = DetectionViewModel()
+    @State private var navigateToRecommendation = false
+    @State private var detectedTotal = 0
 
     var body: some View {
         ZStack {
@@ -43,6 +45,9 @@ struct CountView: View {
         }
         .navigationTitle("Hitung Total")
         .navigationBarTitleDisplayMode(.inline)
+        .navigationDestination(isPresented: $navigateToRecommendation) {
+            RecomendationView(totalMoney: detectedTotal)
+        }
         .contentShape(Rectangle())
         .onTapGesture(count: 2) { requestTotal() }
         .onAppear {
@@ -70,6 +75,8 @@ struct CountView: View {
                                  breakdown: result.breakdown,
                                  mode: "count")
         modelContext.insert(record)
+        detectedTotal = result.total
+        navigateToRecommendation = true
     }
 }
 
