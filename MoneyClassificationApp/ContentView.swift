@@ -2,79 +2,70 @@
 //  ContentView.swift
 //  MoneyClassificationApp
 //
-//  Created by Training-18 on 14/07/26.
+//  Root view: TabView antar mode dengan kontrol izin kamera dan
+//  dukungan navigasi dari Siri (AppRouter).
 //
 
 import SwiftUI
 import SwiftData
+import AVFoundation
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    @State private var router = AppRouter.shared
+    @State private var cameraStatus = AVCaptureDevice.authorizationStatus(for: .video)
 
     var body: some View {
-        NavigationViewWrapper {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
-                }
-                .onDelete(perform: deleteItems)
+        Group {
+            if cameraStatus == .authorized {
+                mainTabs
+            } else {
+                PermissionView(status: cameraStatus, onRequest: requestCamera)
             }
-#if os(macOS)
-            .navigationSplitViewColumnWidth(min: 180, ideal: 200)
-#endif
-            .toolbar {
-#if os(iOS)
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-#endif
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
+        }
+        .task { refreshStatus() }
+    }
+
+    private var mainTabs: some View {
+        TabView(selection: $router.selectedTab) {
+            NavigationStack {
+                DetectionView()
             }
+            .tabItem { Label("Deteksi", systemImage: "banknote") }
+            .tag(AppTab.detection)
+
+            NavigationStack {
+                CountView()
+            }
+            .tabItem { Label("Hitung", systemImage: "sum") }
+            .tag(AppTab.count)
+
+            NavigationStack {
+                VerificationGuideView()
+            }
+            .tabItem { Label("Verifikasi", systemImage: "checkmark.seal") }
+            .tag(AppTab.verification)
+
+            NavigationStack {
+                HistoryView()
+            }
+            .tabItem { Label("Riwayat", systemImage: "clock") }
+            .tag(AppTab.history)
         }
     }
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
+    private func requestCamera() {
+        Task {
+            _ = await AVCaptureDevice.requestAccess(for: .video)
+            refreshStatus()
         }
     }
 
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
-        }
-    }
-}
-
-fileprivate struct NavigationViewWrapper<Content: View>: View {
-    let content: () -> Content
-
-    var body: some View {
-#if os(macOS)
-        NavigationSplitView {
-            content()
-        } detail: {
-            Text("Select an item")
-        }
-#else
-        content()
-#endif
+    private func refreshStatus() {
+        cameraStatus = AVCaptureDevice.authorizationStatus(for: .video)
     }
 }
 
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+        .modelContainer(for: MoneyRecord.self, inMemory: true)
 }
