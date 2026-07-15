@@ -72,7 +72,7 @@ final class CameraService: NSObject, CameraServiceProtocol {
     private let ciContext = CIContext(options: nil)
 
     // Throttling: proses ~8 fps.
-    private let frameInterval: CFTimeInterval = 1.0 / 8.0
+    private let frameInterval: CFTimeInterval = 0.2
     private var lastFrameTime: CFTimeInterval = 0
 
     private var isConfigured = false

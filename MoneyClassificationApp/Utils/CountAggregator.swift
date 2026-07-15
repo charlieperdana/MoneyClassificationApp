@@ -28,7 +28,7 @@ final class CountAggregator {
 
     private var trackedSheets: [TrackedSheet] = []
 
-    init(iouMatchThreshold: CGFloat = 0.5,
+    init(iouMatchThreshold: CGFloat = 0.3,
          framesToConfirm: Int = 3,
          framesToForget: Int = 5) {
         self.iouMatchThreshold = iouMatchThreshold

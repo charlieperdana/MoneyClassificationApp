@@ -35,7 +35,7 @@ final class MoneyDetectorService: MoneyDetectorServiceProtocol {
     private let confidenceThreshold: Float
     private let iouThreshold: Float
 
-    init(confidenceThreshold: Float = 0.25,
+    init(confidenceThreshold: Float = 0.95,
          iouThreshold: Float = 0.45) throws {
         self.confidenceThreshold = confidenceThreshold
         self.iouThreshold = iouThreshold
@@ -43,8 +43,13 @@ final class MoneyDetectorService: MoneyDetectorServiceProtocol {
         do {
             let config = MLModelConfiguration()
             config.computeUnits = .all
-            let coreMLModel = try MoneyDetector(configuration: config).model
-            self.visionModel = try VNCoreMLModel(for: coreMLModel)
+            let coreMLModel = try IndoMoney(configuration: config).model
+            let visionModel = try VNCoreMLModel(for: coreMLModel)
+            visionModel.featureProvider = ThresholdProvider(
+                confidenceThreshold: confidenceThreshold,
+                iouThreshold: iouThreshold
+            )
+            self.visionModel = visionModel
         } catch {
             throw MoneyDetectorError.modelLoadFailed(error.localizedDescription)
         }
