@@ -76,4 +76,56 @@ final class RecomendationService {
         Kamu adalah seorang perencana keuangan profesional yang membantu penyandang tuna netra mengelola dan membelanjakan uang mereka secara bijak.\n\nSaya memiliki total uang sebesar Rp\(totalMoney).\n\nBuatkan satu rekomendasi rencana belanja yang sesuai dengan jumlah uang tersebut. Pilih barang-barang yang bermanfaat untuk kebutuhan sehari-hari dan rekomendasikan tempat belanja yang mudah ditemukan di Indonesia.\n\nPENTING:\n- Kembalikan HANYA JSON yang valid.\n- Jangan gunakan markdown.\n- Jangan tambahkan penjelasan sebelum atau sesudah JSON.\n- Gunakan struktur JSON PERSIS seperti berikut.\n\n{\n  \"recomendation_name\": \"string\",\n  \"description\": \"string\",\n  \"itemsToBuy\": [\n    \"string\"\n  ],\n  \"steps\": [\n    \"string\"\n  ],\n  \"recomendation_shop\": {\n    \"shopName\": \"string\",\n    \"address\": \"string\"\n  }\n}
         """
     }
+    
+    func generateRecomendationSpeech(totalMoney: Int) async throws -> String {
+        guard let url = URL(string: Constants.aiEndpoint) else {
+            throw APIError.invalidURL
+        }
+
+        let prompt = buildPromptSpeech(totalMoney: totalMoney)
+        let requestBody = OpenAIRequest(
+            model: Constants.aiModel,
+            messages: [
+                OpenAIRequest.Message(role: "user", content: prompt)
+            ]
+        )
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.timeoutInterval = 30
+
+        do {
+            request.httpBody = try JSONEncoder().encode(requestBody)
+        } catch {
+            throw APIError.encodingFailed
+        }
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+
+        if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
+            let errorMessage = String(data: data, encoding: .utf8) ?? "Unknown error"
+            throw APIError.apiError("Status \(httpResponse.statusCode): \(errorMessage)")
+        }
+
+        let openAIResponse = try JSONDecoder().decode(OpenAIResponse.self, from: data)
+
+        guard let jsonString = openAIResponse.firstContent,
+              let jsonData = jsonString.data(using: .utf8) else {
+            throw APIError.noData
+        }
+
+        do {
+            let data = try JSONDecoder().decode(RecommendationSpeech.self, from: jsonData)
+            return data.recommendation
+        } catch {
+            throw APIError.decodingFailed(error.localizedDescription)
+        }
+    }
+    
+    private func buildPromptSpeech(totalMoney: Int) -> String {
+        return """
+        Kamu adalah seorang perencana keuangan profesional yang membantu penyandang tuna netra mengelola dan membelanjakan uang mereka secara bijak.\n\nSaya memiliki total uang sebesar Rp\(totalMoney).\n\nBuatkan satu rekomendasi rencana belanja yang sesuai dengan jumlah uang tersebut. Pilih barang-barang yang bermanfaat untuk kebutuhan sehari-hari dan rekomendasikan tempat belanja yang mudah ditemukan di Indonesia.\nBuatkan rekomendasi itu seperti Kamu bicara secara langsung kepada orang karena rekomendasi kamu nantinya akan dibuat text to speech.\n\nPENTING:\n- Kembalikan HANYA JSON yang valid.\n- Jangan gunakan markdown.\n- Jangan tambahkan penjelasan sebelum atau sesudah JSON.\n- Gunakan struktur JSON PERSIS seperti berikut.\n\n{\n  \"recommendation\": \"string\"  }\n}
+        """
+    }
 }

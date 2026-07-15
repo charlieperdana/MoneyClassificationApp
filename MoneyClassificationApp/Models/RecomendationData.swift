@@ -57,3 +57,7 @@ struct RecomendationShop: Decodable {
     let address: String
 }
 
+struct RecommendationSpeech: Decodable, Identifiable {
+    let id = UUID()
+    let recommendation: String
+}
