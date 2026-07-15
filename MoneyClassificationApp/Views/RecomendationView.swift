@@ -45,6 +45,9 @@ struct RecomendationView: View {
             await recommendation
             await speech
         }
+        .onDisappear {
+            viewModel.interruptSpeech()
+        }
     }
 
     @ViewBuilder

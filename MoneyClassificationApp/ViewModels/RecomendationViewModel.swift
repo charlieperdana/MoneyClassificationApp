@@ -63,4 +63,8 @@ final class RecomendationViewModel {
 
         isLoading = false
     }
+    
+    func interruptSpeech() {
+        audioService.stop()
+    }
 }
