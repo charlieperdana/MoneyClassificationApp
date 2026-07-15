@@ -15,6 +15,11 @@ final class RecomendationViewModel {
     var errorMessage: String?
 
     private let service = RecomendationService()
+    private let audioService: AudioFeedbackServiceProtocol
+    
+    init() {
+        self.audioService = AudioFeedbackService()
+    }
 
     func generateRecomendation(for totalMoney: Int) async {
         guard totalMoney > 0 else {
@@ -50,6 +55,11 @@ final class RecomendationViewModel {
         } catch {
             errorMessage = error.localizedDescription
         }
+        
+        if let textToSpeech {
+            audioService.speak(textToSpeech, interrupt: true)
+        }
+        
 
         isLoading = false
     }

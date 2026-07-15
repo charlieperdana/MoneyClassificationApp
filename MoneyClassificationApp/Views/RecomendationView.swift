@@ -40,6 +40,7 @@ struct RecomendationView: View {
         .navigationBarTitleDisplayMode(.inline)
         .task {
             await viewModel.generateRecomendation(for: totalMoney)
+            await viewModel.generateRecomendationSpeech(for: totalMoney)
         }
     }
 
