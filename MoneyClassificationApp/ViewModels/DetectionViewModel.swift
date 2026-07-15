@@ -54,10 +54,10 @@ final class DetectionViewModel {
     private var isProcessingFrame = false
 
     init(cameraService: CameraServiceProtocol = CameraService(),
-         detectorFactory: @escaping () throws -> MoneyDetectorServiceProtocol = { try MoneyDetectorService() },
+         detectorFactory: @escaping () throws -> MoneyDetectorServiceProtocol = { try MoneyDetectorService(iouThreshold: 0.3) },
          audioService: AudioFeedbackServiceProtocol = AudioFeedbackService(),
          hapticService: HapticServiceProtocol = HapticService(),
-         countAggregator: CountAggregator = CountAggregator(),
+         countAggregator: CountAggregator = CountAggregator(iouMatchThreshold: 0.3),
          debounceInterval: TimeInterval = 2.0,
          lowLightThreshold: Double = 0.15) {
         self.cameraService = cameraService

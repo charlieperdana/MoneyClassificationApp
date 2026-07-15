@@ -1,0 +1,24 @@
+{
+    "fileFormatVersion": "1.0.0",
+    "itemInfoEntries": {
+        "4ABB3DB2-2AC7-4C6F-AE5C-39937B2C14F6": {
+            "author": "com.apple.CoreML",
+            "description": "External Metadata Overlay",
+            "name": "Metadata.json",
+            "path": "com.apple.CoreML/Metadata.json"
+        },
+        "AC552124-0DCC-42E3-83B2-258D351BA72A": {
+            "author": "com.apple.CoreML",
+            "description": "CoreML Model Specification",
+            "name": "RupiahDetector 1.mlmodel",
+            "path": "com.apple.CoreML/RupiahDetector 1.mlmodel"
+        },
+        "BD039120-28BF-4357-BD7D-4AD80E24DEC0": {
+            "author": "com.apple.CoreML",
+            "description": "External FeatureDescription Overlay",
+            "name": "FeatureDescriptions.json",
+            "path": "com.apple.CoreML/FeatureDescriptions.json"
+        }
+    },
+    "rootModelIdentifier": "AC552124-0DCC-42E3-83B2-258D351BA72A"
+}

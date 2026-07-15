@@ -43,7 +43,8 @@ final class MoneyDetectorService: MoneyDetectorServiceProtocol {
         do {
             let config = MLModelConfiguration()
             config.computeUnits = .all
-            let coreMLModel = try MoneyDetector(configuration: config).model
+            let coreMLModel = try RupiahDetectorModel(configuration: config).model
+            //MoneyDetector(configuration: config).model
             self.visionModel = try VNCoreMLModel(for: coreMLModel)
         } catch {
             throw MoneyDetectorError.modelLoadFailed(error.localizedDescription)
