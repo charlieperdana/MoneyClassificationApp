@@ -18,6 +18,6 @@ Provide shopping recommendat
 | **Text-to-Speech (AVSpeechSynthesizer)** | Provides spoken feedback for visually impaired users |ions based on the user's available cash.
 
 ## Screenshoot
-<img width="655" height="510" alt="image" src="https://github.com/user-attachments/assets/54dd276f-0f07-4758-8f54-78af48ba0f1a" />
+<img width="500" height="410" alt="image" src="https://github.com/user-attachments/assets/54dd276f-0f07-4758-8f54-78af48ba0f1a" />
 
 
